@@ -1,0 +1,16 @@
+/* 
+    Created on : 16-Mar-2019, 5:19:39 PM
+    Author     : SinaM
+*/
+
+#rootPane{
+    -fx-background-color: black;
+    -fx-padding: 0px 0px 0px 10px; /*top right bottom left*/
+}
+#topImages{
+    -fx-spacing: 250px;
+}
+#lblNewest, #lblOldest{
+    -fx-font-size: 100px;
+}
+
