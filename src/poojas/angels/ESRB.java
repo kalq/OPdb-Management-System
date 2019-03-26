@@ -1,11 +1,20 @@
 package poojas.angels;
 
 public enum ESRB {
-	EARLY_CHILDHOOD,
-	EVERYONE,
-	EVERYONE_10PLUS,
-	TEEN,
-	MATURE,
-	ADULTS_ONLY,
-	RATING_PENDING
+    EARLY_CHILDHOOD("Preschool"),
+    EVERYONE("All"),
+    EVERYONE_10PLUS("10+"),
+    TEEN("13+"),
+    MATURE("17+"),
+    ADULTS_ONLY("18+");
+
+    private String ageRange;
+
+    private ESRB(String ageRange) {
+        this.ageRange = ageRange;
+    }
+
+    public String getAgeRange() {
+        return ageRange;
+    }
 }

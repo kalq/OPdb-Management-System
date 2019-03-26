@@ -1,64 +1,78 @@
 package poojas.angels;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Company {
 
-	private String name;
-	private VideoGame[] published;
-	private VideoGame[] developed;
+    private String name;
+    private ArrayList<VideoGame> published;
+    private ArrayList<VideoGame> developed;
 
-	public Company() {
-		// TODO - implement Company.Company
-		throw new UnsupportedOperationException();
-	}
+    public Company() {
+        this.published = new ArrayList<>();
+        this.developed = new ArrayList<>();
+    }
 
-	/**
-	 * 
-	 * @param name
-	 */
-	public Company(String name) {
-		// TODO - implement Company.Company
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param name
+     */
+    public Company(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    /**
+     *
+     * @param name
+     * @param published
+     * @param developed
+     */
+    public Company(String name, VideoGame[] published, VideoGame[] developed) {
+        this.name = name;
+        this.published = new ArrayList<>(Arrays.asList(published));
+        this.developed = new ArrayList<>(Arrays.asList(developed));
+    }
 
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public VideoGame[] getPublished() {
-		return this.published;
-	}
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * 
-	 * @param published
-	 */
-	public void setPublished(VideoGame[] published) {
-		this.published = published;
-	}
+    public ArrayList<VideoGame> getPublished() {
+        return this.published;
+    }
 
-	public VideoGame[] getDeveloped() {
-		return this.developed;
-	}
+    /**
+     *
+     * @param published
+     */
+    public void setPublished(ArrayList<VideoGame> published) {
+        this.published = published;
+    }
 
-	/**
-	 * 
-	 * @param developed
-	 */
-	public void setDeveloped(VideoGame[] developed) {
-		this.developed = developed;
-	}
+    public ArrayList<VideoGame> getDeveloped() {
+        return this.developed;
+    }
 
-	public String toString() {
-		// TODO - implement Company.toString
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param developed
+     */
+    public void setDeveloped(ArrayList<VideoGame> developed) {
+        this.developed = developed;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s Published: %s, Developed: %s", this.name, this.published, this.developed);
+    }
 
 }

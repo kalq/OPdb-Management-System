@@ -1,47 +1,70 @@
 package poojas.angels;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class VideoGameList {
 
-	private VideoGame[] games;
+    private ArrayList<VideoGame> games;
 
-	public VideoGame[] getGames() {
-		return this.games;
-	}
+    public VideoGameList() {
+        this.games = new ArrayList<>();
+    }
 
-	/**
-	 * 
-	 * @param games
-	 */
-	public void setGames(VideoGame[] games) {
-		this.games = games;
-	}
+    /**
+     *
+     * @param games
+     */
+    public VideoGameList(VideoGame[] games) {
+        this.games = new ArrayList<>(Arrays.asList(games));
+    }
 
-	/**
-	 * 
-	 * @param game
-	 */
-	public void addGame(VideoGame game) {
-		// TODO - implement VideoGameList.addGame
-		throw new UnsupportedOperationException();
-	}
+    public ArrayList<VideoGame> getGames() {
+        return this.games;
+    }
 
-	/**
-	 * 
-	 * @param game
-	 */
-	public void removeGame(VideoGame game) {
-		// TODO - implement VideoGameList.removeGame
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param games
+     */
+    public void setGames(ArrayList<VideoGame> games) {
+        this.games = games;
+    }
 
-	public void sort() {
-		// TODO - implement VideoGameList.sort
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param game
+     */
+    public void addGame(VideoGame game) {
+        this.games.add(game);
+    }
 
-	public String toString() {
-		// TODO - implement VideoGameList.toString
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param game
+     */
+    public void removeGame(VideoGame game) {
+        this.games.remove(game);
+    }
+
+    public void sort() {
+        // TODO - implement VideoGameList.sort
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * A single line list of all Video Games
+     * @return String representation
+     */
+    @Override
+    public String toString() {
+        String gameList = "";
+
+        for (VideoGame game : this.games) {
+            gameList += game + " ";
+        }
+
+        return gameList.trim();
+    }
 
 }
