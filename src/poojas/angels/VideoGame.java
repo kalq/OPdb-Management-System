@@ -1,16 +1,17 @@
 package poojas.angels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class VideoGame {
+public class VideoGame implements Serializable {
 
     private String name;
     private String genre;
     private int year;
     private double rating;
     private ESRB esrb;
-    
+
     // ArrayLists are created in the VideoGame constructors because of how
     // Java converts arrays into an ArrayList using the ArrayList constructor.
     private ArrayList<Platform> platform;
@@ -143,8 +144,39 @@ public class VideoGame {
 
     @Override
     public String toString() {
-        //return String.format("");
-        return "";
+        String[] platforms = new String[this.platform.size()];
+        String[] publishers = new String[this.publishers.size()];
+        String[] developers = new String[this.developers.size()];
+        int index = 0;
+
+        for(Platform eachPlatform : this.platform) {
+            platforms[index] = eachPlatform.getName();
+            index++;
+        }
+
+        index = 0;
+        for(Company eachPublisher : this.publishers) {
+            publishers[index] = eachPublisher.getName();
+            index++;
+        }
+
+        index = 0;
+        for(Company eachDeveloper : this.developers) {
+            developers[index] = eachDeveloper.getName();
+            index++;
+        }
+
+        return String.format("Name: %s%n"
+                + "Genre: %s%n"
+                + "Year: %d%n"
+                + "Rating: %.1f%n"
+                + "ESRB: %s%n"
+                + "Platform(s): %s%n"
+                + "Publisher(s): %s%n"
+                + "Developer(s): %s%n",
+                this.name, this.genre, this.year, this.rating, this.esrb.getAgeRange(),
+                String.join(", ", platforms), String.join(", ", publishers), String.join(", ", developers)
+        );
     }
 
 }
