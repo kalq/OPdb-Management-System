@@ -2,7 +2,10 @@ package poojas.angels;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 
 /**
  * @author Bassam
@@ -16,40 +19,66 @@ public class PoojasAngels {
     public static void main(String[] args) throws Exception {
 
         String fileName = "database\\videogamelist.txt";
-        /*
-        Company company = new Company("Blizzard");
+
+        RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
         
-        VideoGame game = new VideoGame("Overwatch",
-                "fps",
-                2016,
-                9.9,
-                ESRB.TEEN,
-                new Platform[]{Platform.WINDOWS, Platform.PS4, Platform.XBOX_ONE},
+        /*
+        Company company = new Company("Jagex");
+
+        VideoGame game = new VideoGame("Runescape",
+                "mmorpg",
+                2001,
+                9.0,
+                ESRB.EVERYONE,
+                new Platform[]{Platform.WINDOWS, Platform.MAC_OS, Platform.LINUX},
                 new Company[]{company},
                 new Company[]{company});
+        */
+
+        raf.seek(raf.length());
+        raf.writeBytes("Runescape,");
+        raf.writeBytes("mmorpg,");
+        raf.writeBytes("2001,");
+        raf.writeBytes("4.0,");
+        raf.writeBytes("Everyone,");
+        raf.writeBytes("Windows/MacOS/Linux,");
+        raf.writeBytes("Jagex,");
+        raf.writeBytes("Jagex");
         
+        /*
         FileOutputStream fo = new FileOutputStream(fileName);
         ObjectOutputStream oo = new ObjectOutputStream(fo);
-        
+
         oo.writeObject(game);
-        
+
         oo.close();
         fo.close();
-         */
+
         FileInputStream fi = new FileInputStream(fileName);
         ObjectInputStream oi = new ObjectInputStream(fi);
 
+        VideoGame games = null;
+
         while (true) {
             try {
-                VideoGame games = (VideoGame) oi.readObject();
-                System.out.println(games);
+                games = (VideoGame) oi.readObject();
+
             } catch (EOFException e) {
                 System.out.println("Reached End of File.");
                 break;
             }
+            System.out.println(games);
         }
 
         fi.close();
         oi.close();
+
+        FileOutputStream fo = new FileOutputStream(fileName);
+        ObjectOutputStream oo = new ObjectOutputStream(fo);
+
+        oo.writeObject(games);
+
+        fo.close();
+        oo.close();*/
     }
 }

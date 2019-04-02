@@ -1,9 +1,10 @@
 package poojas.angels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Company {
+public class Company implements Serializable {
 
     private String name;
     private ArrayList<VideoGame> published;
