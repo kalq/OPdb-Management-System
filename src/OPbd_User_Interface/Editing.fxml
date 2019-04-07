@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+<AnchorPane id="rootPane" prefHeight="700" prefWidth="700" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.EditingController">
+    <children>
+        <Label layoutX="50" layoutY="20" fx:id="lblBeforeEdit" text="Before Editing..." />
+        <Group layoutX="250" layoutY="120">
+            <Label layoutX="0" layoutY="0" fx:id="lblSelectIndex" text="Select Index" />
+            <TextField layoutX="60" layoutY="70" fx:id="txtSelectIndex" text="00" />
+        </Group>
+        <Group layoutX="200" layoutY="320">
+            <Label layoutX="0" layoutY="0" fx:id="lblWhichCat" text="Edit Which Category?" />
+            <ChoiceBox prefWidth="200" layoutX="70" layoutY="70" fx:id="choiceEdit" value="Title">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Title" />
+                        <String fx:value="Genre" />
+                        <String fx:value="Publisher" />
+                        <String fx:value="Developer" />
+                        <String fx:value="Release" />
+                        <String fx:value="Platform" />
+                        <String fx:value="ESRB" />
+                        <String fx:value="Rating" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+        </Group>
+        <Group layoutX="110" layoutY="530">
+            <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
+            <Button layoutX="350" fx:id="btnEdit" onAction="#editAction" text="Edit" />
+        </Group>
+    </children>
+</AnchorPane>

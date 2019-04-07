@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1200" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.AddingController">
+    <children>
+        <Group layoutX="250">
+            <Label layoutX="80" layoutY="20" fx:id="lblTitle" text="Next Available Index" underline="true" />
+            <Label layoutX="340" layoutY="90" fx:id="lblIndex" text="0" />
+        </Group>
+        <GridPane layoutX="50" layoutY="220" hgap="4" vgap="4">
+            <!--Title-->
+            <Label GridPane.columnIndex="0" fx:id="lblGameName" text="Title: " />
+            <TextField GridPane.columnIndex="1" fx:id="txtGameName" />
+            <!--Publisher-->
+            <Label GridPane.columnIndex="24" fx:id="lblPublisher" text="Publisher: " />
+            <TextField GridPane.columnIndex="25" fx:id="txtPublisher" />
+            <!--Genre-->
+            <Label GridPane.rowIndex="10" GridPane.columnIndex="0" fx:id="lblGenre" text="Genre: " />
+            <ComboBox GridPane.rowIndex="10" GridPane.columnIndex="1" fx:id="cmbGenre" />
+            <!--Developer-->
+            <Label GridPane.rowIndex="10" GridPane.columnIndex="24" fx:id="lblDeveloper" text="Developer: " />
+            <TextField GridPane.rowIndex="10" GridPane.columnIndex="25" fx:id="txtDeveloper" />
+            <!--Release Date-->
+            <Label GridPane.rowIndex="20" GridPane.columnIndex="0" fx:id="lblRelease" text="Release: " />
+            <DatePicker GridPane.rowIndex="20" GridPane.columnIndex="1" fx:id="releaseDate" />
+            <!--Platform-->
+            <Label GridPane.rowIndex="20" GridPane.columnIndex="24" fx:id="lblPlatform" text="Platform: " />
+            <ComboBox GridPane.rowIndex="20" GridPane.columnIndex="25" fx:id="cmbPlatform" />
+            <!--ESRB Rating-->
+            <Label GridPane.rowIndex="30" GridPane.columnIndex="0" fx:id="lblRating" text="ESRB: " />
+            <ComboBox GridPane.rowIndex="30" GridPane.columnIndex="1" fx:id="cmbRating" />
+            <!--Game Rating-->
+            <Label GridPane.rowIndex="30" GridPane.columnIndex="24" fx:id="lblGameRate" text="Rating: " />
+            <Label GridPane.rowIndex="30" GridPane.columnIndex="26" fx:id="lblCount" />
+            <Slider GridPane.rowIndex="30" GridPane.columnIndex="25" fx:id="sliderGameRate" orientation="HORIZONTAL" prefWidth="300" min="1" max="10" />
+        </GridPane>
+        <Group layoutX="180" layoutY="650">            
+            <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
+            <Button layoutX="550" fx:id="btnAdd" text="Add Game" />
+        </Group>
+    </children>
+</AnchorPane>

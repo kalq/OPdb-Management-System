@@ -7,10 +7,137 @@
     -fx-background-color: black;
     -fx-padding: 0px 0px 0px 10px; /*top right bottom left*/
 }
+
 #topImages{
-    -fx-spacing: 250px;
+    -fx-spacing: 500px;
 }
-#lblNewest, #lblOldest{
-    -fx-font-size: 100px;
+#bottomImages{
+    -fx-spacing: 570px;
+}
+#lblNewest, #lblOldest, #lblTitle, #lblIndex, #lblSearchBy, #lblSelect {
+    -fx-font-size: 60px;
+    -fx-text-fill: rgb(0, 255, 20);
+}
+#viewing {
+    -fx-image: url("../icons/viewAll.png");
+}
+#search {
+    -fx-image: url("../icons/search.png");
+}
+#logo {
+    -fx-image: url("../icons/logo.png");
+}
+#adding {
+    -fx-image: url("../icons/adding.png");
+}
+#editing {
+    -fx-image: url("../icons/editing.png");
+}
+#deleting {
+    -fx-image: url("../icons/deleting.png");
+}
+#viewing:hover {
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,50) , 0,0,0,1 );
 }
 
+/*Adding Pop-Up form*/
+#txtGameName, #cmbGenre, #releaseDate, #txtPublisher, #txtDeveloper, #cmbRating, #cmbPlatform, #lblCount, #choiceEdit {
+    -fx-font-size: 27px;
+    -fx-text-fill: rgb(0,255,20);
+    -fx-background-color: black;
+    -fx-border-color: rgb(0,255,20);
+    -fx-max-width: 450px;
+
+}
+#lblGameName, #lblGenre, #lblDeveloper, #lblRelease, #lblPublisher, #lblRating, #lblPlatform, #lblGameRate {
+    -fx-font-size: 32px;
+    -fx-text-fill: rgb(0,255,20);
+}
+#btnAdd, #btnCancel, #btnDelete, #btnEdit {
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(0,255,20);
+    -fx-border-radius: 10px;
+    -fx-font-size: 50px;
+    -fx-text-fill: rgb(0,255,20);
+}
+#btnAdd:hover, #btnCancel:hover, #btnDelete:hover, #btnEdit:hover {
+    -fx-background-color: rgb(0,80,7);
+    -fx-cursor: HAND;
+}
+
+#lblSelectIndex, #lblSelectTitle, #lblSelect, #lblBeforeEdit, #lblWhichCat {
+    -fx-text-fill: rgb(0,255,20);
+    -fx-font-size: 40px;
+}
+#txtSelectIndex, #txtSelectTitle {
+    -fx-font-size: 40px;
+    -fx-text-fill: rgb(0,255,20);
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(0,255,20);
+    -fx-max-width: 100px;
+}
+#txtSelectTitle {
+    -fx-max-width: 400px;
+}
+#lblCount {
+    -fx-border-color: none;
+}
+#lblSelect {
+    -fx-font-size: 50px;
+}
+#viewAllImages {
+    -fx-spacing: 300px;
+}
+
+/*Table Styling Reference: https://stackoverflow.com/questions/33938811/styling-a-tableview-in-css-javafx*/
+.root{
+    -fx-background-color: #262626;
+}
+
+.table-view{
+   -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+/* Spaltenköpfe
+    Struktur column-header-background -> column-header */
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(0,255,20);
+    -fx-font-size: 25px;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: rgb(0,255,20);
+    -fx-font-size: 30px;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */  
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}

@@ -14,7 +14,7 @@ public class OPbd_Management_System extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -23,6 +23,8 @@ public class OPbd_Management_System extends Application {
         
         stage.setScene(scene);
         stage.setTitle("OPbd Management System");
+        stage.setMaximized(true);
+        
         stage.show();
     }
 

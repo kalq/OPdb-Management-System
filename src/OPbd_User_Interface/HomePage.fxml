@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.ColorAdjust?>
+
+<AnchorPane fx:id="rootPane" prefHeight="1000" prefWidth="2000" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.HomeController">
+    <children>
+        <HBox fx:id="topImages">
+            <!--OPbd Logo-->
+            <ImageView fx:id="logo" fitHeight="220" fitWidth="220" />
+            <!--View Mode-->
+            <ImageView fx:id="viewing" fitHeight="190" fitWidth="170" />
+            <!--Delete Data-->
+            <ImageView fx:id="deleting" fitHeight="195" fitWidth="180" />
+        </HBox>
+            
+        <Group layoutX="60" layoutY="230">
+            <!--Newest Games-->
+            <Rectangle fx:id="newGame" width="850" height="580" />
+            <Label layoutX="230" fx:id="lblNewest" text="Newest Games" />
+            <!--Oldest Games-->
+            <Rectangle layoutX="950" fx:id="oldGame" width="850" height="580" />
+            <Label layoutX="1180" fx:id="lblOldest" text="Oldest Games" />
+        </Group>
+            
+        <HBox layoutX="500" layoutY="825" fx:id="bottomImages">
+            <!--Add Data-->
+            <ImageView fx:id="adding" fitHeight="160" fitWidth="140" />
+            <!--Edit Data-->
+            <ImageView fx:id="editing" fitHeight="170" fitWidth="160" />
+        </HBox>
+    </children>    
+</AnchorPane>
