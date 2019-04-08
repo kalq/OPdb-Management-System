@@ -2,7 +2,7 @@ package poojas.angels;
 
 public enum ESRB {
     EARLY_CHILDHOOD("Preschool"),
-    EVERYONE("All"),
+    EVERYONE("Everyone"),
     EVERYONE_10PLUS("10+"),
     TEEN("13+"),
     MATURE("17+"),
