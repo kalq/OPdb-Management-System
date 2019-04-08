@@ -18,10 +18,15 @@ public class PoojasAngels {
      */
     public static void main(String[] args) throws Exception {
 
-        String fileName = "database\\videogamelist.txt";
-
-        RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
+        String baseDatabase = "database\\videogamelist.txt";
         
+        String ivansList = "database\\ivan\\videogamelist.txt";
+        String mikesList = "database\\mike\\videogamelist.txt";
+        String bassamsList = "database\\bassam\\videogamelist.txt";
+        String sinasList = "database\\sina\\videogamelist.txt";
+
+        RandomAccessFile raf = new RandomAccessFile(baseDatabase, "rw");
+
         /*
         Company company = new Company("Jagex");
 
@@ -43,8 +48,10 @@ public class PoojasAngels {
         raf.writeBytes("Everyone,");
         raf.writeBytes("Windows/MacOS/Linux,");
         raf.writeBytes("Jagex,");
-        raf.writeBytes("Jagex");
-        
+        FixedLengthStringIO.writeFixedLengthString("Jagex", 50, raf);
+
+        raf.seek(0);
+
         /*
         FileOutputStream fo = new FileOutputStream(fileName);
         ObjectOutputStream oo = new ObjectOutputStream(fo);
