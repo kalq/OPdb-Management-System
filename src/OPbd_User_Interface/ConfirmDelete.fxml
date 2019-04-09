@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--This is a small FXML page for deleting confirmation (the Alert class couldn't be styled & customized.-->
+<AnchorPane id="rootPane" prefHeight="400.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.ConfirmDeleteController">
+    <children>
+        <Label layoutX="10" layoutY="20" fx:id="lblTitle" text="Are you sure you want to delete index:" />
+        <Label layoutX="500" layoutY="100" fx:id="lblIndex" text="0" />
+        <Group layoutX="150" layoutY="230">
+            <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
+            <Button layoutX="400" fx:id="btnDelete" onAction="#deleteAction" text="Yes, Delete!!" />
+        </Group>
+    </children>
+</AnchorPane>

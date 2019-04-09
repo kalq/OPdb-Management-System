@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.shape.Rectangle?>
 
+<!--The ViewAll Page should show a database-like table of all file records-->
 <AnchorPane fx:id="rootPane" prefHeight="1000" prefWidth="2000" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.ViewAllController">
     <children>
 
@@ -37,7 +38,7 @@
                     <TableColumn prefWidth="200" fx:id="columnESRB" text="ESRB" />
                     <TableColumn prefWidth="200" fx:id="columnRating" text="Rating" />
                 </columns>  
-                <!--Table items are in the controller-->
+                <!--Table items must be configured with records in the controller-->
             </TableView>
         </Group>
     </children>   

@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.effect.ColorAdjust?>
 
+<!--This is the home page where everything starts...-->
 <AnchorPane fx:id="rootPane" prefHeight="1000" prefWidth="2000" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.HomeController">
     <children>
         <HBox fx:id="topImages">
@@ -24,9 +25,11 @@
             <!--Newest Games-->
             <Rectangle fx:id="newGame" width="850" height="580" />
             <Label layoutX="230" fx:id="lblNewest" text="Newest Games" />
+            <Label layoutX="0" layoutY="50" fx:id="lblNewRecords" /> <!--TODO: Must read from file's newest records-->
             <!--Oldest Games-->
             <Rectangle layoutX="950" fx:id="oldGame" width="850" height="580" />
             <Label layoutX="1180" fx:id="lblOldest" text="Oldest Games" />
+            <Label layoutX="1180" layoutY="50" fx:id="lblOldRecords" /> <!--TODO: Must read from file's newest records-->
         </Group>
             
         <HBox layoutX="500" layoutY="825" fx:id="bottomImages">

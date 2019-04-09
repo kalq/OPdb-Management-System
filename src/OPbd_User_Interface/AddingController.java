@@ -18,21 +18,22 @@ import javafx.stage.Stage;
 public class AddingController implements Initializable {
 
     @FXML
-    private Label lblCount;
+    private Label lblCount; //TODO --> extract Slider number for file writing
     @FXML
-    private Slider sliderGameRate;
+    private Slider sliderGameRate; //This is just the slider, must extract lblCount number
     @FXML
-    private ComboBox cmbRating;
+    private ComboBox cmbRating, cmbGenre, cmbPlatform; //TODO --> extract dropbox for file writing
     @FXML
-    private DatePicker releaseDate;
+    private DatePicker releaseDate; //TODO --> extract date as string for records
 
     @FXML
-    private javafx.scene.control.Button btnCancel;
-
+    private javafx.scene.control.Button btnCancel, btnAdd; 
+    
+    
     @FXML
     private void cancelAction() {
         Stage stage = (Stage) btnCancel.getScene().getWindow(); //Grabs the Adding.fxml window
-        stage.close();
+        stage.close(); //Closes FXML page
     }
 
     /**
@@ -44,21 +45,50 @@ public class AddingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        //For showing integer value of slider
-        sliderGameRate.valueProperty().addListener(new ChangeListener() {
+        //For showing integer value of slider, there must be an event listener. Otherwise it's a large double number by default.
+        sliderGameRate.valueProperty().addListener(new ChangeListener() { //Anonymous Event using ChangeListener class
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) { //Requires 3 arguments for ChangeListener to work
-                lblCount.textProperty().setValue(
-                        String.valueOf((int) sliderGameRate.getValue()));
+                lblCount.textProperty().setValue(String.valueOf((int) sliderGameRate.getValue()));
             }
         });
-
+        
+        //ComboBox ESRB items
         cmbRating.getItems().addAll(
-                "s@example.com",
-                "i@example.com",
-                "e@example.com",
-                "m@example.com"
+                "Preschool",
+                "Everyone",
+                "10+",
+                "13+",
+                "17+",
+                "18+"
         );
+        //ComboBox Genre items
+        cmbGenre.getItems().addAll(
+                "Action & Adventure",
+                "Role-Playing Game",
+                "Massive Online Multiplayer",
+                "First-Person Shooter",
+                "Indie Game"
+        );
+        //ComboBox Platform items
+        cmbPlatform.getItems().addAll(
+                "Nintendo 64",
+                "GameCube",
+                "Wii",
+                "Wii U",
+                "Switch",
+                "Playstation",
+                "Playstation 2",
+                "Playstation 3",
+                "Playstation 4",
+                "Xbox",
+                "Xbox 360",
+                "Xbox One",
+                "Windows",
+                "MacOS",
+                "Linux"     
+        ); /*FXCollections wouldn't let me use fx:factory multiple times for ComboBox items, 
+            so they must be in initialize method.*/
     }
 
 }

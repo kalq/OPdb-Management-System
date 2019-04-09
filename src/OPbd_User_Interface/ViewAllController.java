@@ -32,7 +32,12 @@ public class ViewAllController implements Initializable {
     @FXML private javafx.scene.image.ImageView logo, adding, editing, deleting;
     @FXML private TableView dataTable;
     @FXML private TableColumn columnIndex, columnTitle, columnGenre, columnRelease, columnPublisher, columnDeveloper, columnESRB, columnRating;
-
+    
+    //TODO --> Make this method fill the table with all existing data
+    private void fillTable(){
+        
+    }
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -40,6 +45,9 @@ public class ViewAllController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fillTable(); //Initializes fill table method to read records for viewing
+        
+        //----------- This Event takes you back to the home page ---------\\
         logo.setOnMouseClicked((MouseEvent clickLogo) -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
@@ -103,10 +111,10 @@ public class ViewAllController implements Initializable {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+        //----Editing Page Pop-Up----\\
         editing.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editing.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/multipleEditFXML/Editing.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.WINDOW_MODAL);

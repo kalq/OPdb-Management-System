@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane id="rootPane" prefHeight="700" prefWidth="700" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.EditingController">
+<!--This is the main editing page, where users get to choose what data field they'd like to edit in a specified index-->
+<AnchorPane id="rootPane" prefHeight="700" prefWidth="700" xmlns:fx="http://javafx.com/fxml/1" fx:controller="multipleEditFXML.EditingController">
     <children>
         <Label layoutX="50" layoutY="20" fx:id="lblBeforeEdit" text="Before Editing..." />
         <Group layoutX="250" layoutY="120">
@@ -16,6 +17,7 @@
         </Group>
         <Group layoutX="200" layoutY="320">
             <Label layoutX="0" layoutY="0" fx:id="lblWhichCat" text="Edit Which Category?" />
+            <!--Whichever they choose, it goes to that form option on seperate page with it's own Controller-->
             <ChoiceBox prefWidth="200" layoutX="70" layoutY="70" fx:id="choiceEdit" value="Title">
                 <items>
                     <FXCollections fx:factory="observableArrayList">

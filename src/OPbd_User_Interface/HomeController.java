@@ -39,6 +39,10 @@ public class HomeController implements Initializable {
 
     }
 
+    /**
+     * @method fxStyles() is just for styling nodes that I couldn't figure out
+     * through CSS
+     */
     public void fxStyles() {
         //-----------Setting Rectangle Styles------------//
         newGame.setFill(Color.TRANSPARENT);
@@ -49,7 +53,10 @@ public class HomeController implements Initializable {
         oldGame.setStrokeWidth(3);
     }
 
-    //----------This method contains all of the home page events-----------\\
+    /**
+     * @method This method contains all Mouse-Click EventHandlers for Adding,
+     * Editing, Deleting and Viewing ImageViews
+     */
     public void homePage_events() {
         //---------For View Mode Page------------\\
         viewing.setOnMouseClicked((MouseEvent event) -> { // Lambda Expression
@@ -110,15 +117,16 @@ public class HomeController implements Initializable {
                 root.getStylesheets().add(css);
 
                 stage.show();
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
+        //Editing page pop-up
         editing.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editing.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/multipleEditFXML/Editing.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.WINDOW_MODAL);
@@ -131,7 +139,7 @@ public class HomeController implements Initializable {
                 root.getStylesheets().add(css);
 
                 stage.show();
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
