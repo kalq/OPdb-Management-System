@@ -16,10 +16,11 @@ import javafx.scene.shape.*;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.stage.*;
+import poojas.angels.*;
 
 /**
  *
@@ -31,12 +32,31 @@ public class HomeController implements Initializable {
     private Rectangle newGame, oldGame;
     @FXML
     private ImageView viewing, adding, editing, deleting;
+    
+    @FXML
+    Label lblNewRecords, lblOldRecords;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fxStyles();
         homePage_events();
 
+        FileManager.readDatabase();
+        
+        /* Write Records
+        
+        
+        try {
+            FileManager.writeRecord("Overwatch", "fps", "24/05/2016", "9", "TEEN", "WINDOWS", "Blizzard", "Blizzard");
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }/**/
+        
+        VideoGameList gameList = FileManager.getGameList();
+        
+        gameList.getGames().forEach((game) -> {
+            lblOldRecords.setText(lblOldRecords.getText() + game.getName());
+        });
     }
 
     /**
