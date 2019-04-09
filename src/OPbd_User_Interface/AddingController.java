@@ -1,14 +1,15 @@
 package OPbd_User_Interface;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import poojas.angels.*;
 
 /**
  * FXML Controller class
@@ -25,11 +26,18 @@ public class AddingController implements Initializable {
     private ComboBox cmbRating, cmbGenre, cmbPlatform; //TODO --> extract dropbox for file writing
     @FXML
     private DatePicker releaseDate; //TODO --> extract date as string for records
+    @FXML
+    private TextField txtGameName, txtPublisher, txtDeveloper;
+    @FXML
+    private Button btnCancel, btnAdd;
 
     @FXML
-    private javafx.scene.control.Button btnCancel, btnAdd; 
-    
-    
+    private void addAction() {
+        VideoGame game = new VideoGame(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
+                dateToString(releaseDate), Integer.parseInt(lblCount.getText()), ESRB.valueOf(cmbRating.getSelectionModel().getSelectedItem().toString()),
+                Platform.valueOf(cmbPlatform.getSelectionModel().getSelectedItem().toString()), txtPublisher.getText(), txtDeveloper.getText());
+    }
+
     @FXML
     private void cancelAction() {
         Stage stage = (Stage) btnCancel.getScene().getWindow(); //Grabs the Adding.fxml window
@@ -52,7 +60,7 @@ public class AddingController implements Initializable {
                 lblCount.textProperty().setValue(String.valueOf((int) sliderGameRate.getValue()));
             }
         });
-        
+
         //ComboBox ESRB items
         cmbRating.getItems().addAll(
                 "Preschool",
@@ -86,9 +94,14 @@ public class AddingController implements Initializable {
                 "Xbox One",
                 "Windows",
                 "MacOS",
-                "Linux"     
-        ); /*FXCollections wouldn't let me use fx:factory multiple times for ComboBox items, 
+                "Linux"
+        );
+        /*FXCollections wouldn't let me use fx:factory multiple times for ComboBox items, 
             so they must be in initialize method.*/
     }
 
+    public String dateToString(DatePicker date) {
+        String pattern = "dd/MM/yyyy";
+        return date.getValue().format(DateTimeFormatter.ofPattern(pattern));
+    }
 }

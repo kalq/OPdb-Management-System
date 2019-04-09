@@ -7,13 +7,14 @@ public class VideoGame implements Serializable {
     private String name;
     private String genre;
     private String releaseDate;
-    private double rating;
+    private int rating;
     private ESRB esrb;
     private Platform platform;
-    private Company publisher;
-    private Company developer;
+    private String publisher;
+    private String developer;
 
-    public VideoGame() {}
+    public VideoGame() {
+    }
 
     /**
      *
@@ -22,11 +23,11 @@ public class VideoGame implements Serializable {
      * @param releaseDate
      * @param rating
      * @param esrb
-     * @param platforms
-     * @param publishers
-     * @param developers
+     * @param platform
+     * @param publisher
+     * @param developer
      */
-    public VideoGame(String name, String genre, String releaseDate, double rating, ESRB esrb, Platform platform, Company publisher, Company developer) {
+    public VideoGame(String name, String genre, String releaseDate, int rating, ESRB esrb, Platform platform, String publisher, String developer) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
@@ -73,7 +74,7 @@ public class VideoGame implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    public double getRating() {
+    public int getRating() {
         return this.rating;
     }
 
@@ -81,7 +82,7 @@ public class VideoGame implements Serializable {
      *
      * @param rating
      */
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -109,7 +110,7 @@ public class VideoGame implements Serializable {
         this.platform = platform;
     }
 
-    public Company getPublisher() {
+    public String getPublisher() {
         return this.publisher;
     }
 
@@ -117,11 +118,11 @@ public class VideoGame implements Serializable {
      *
      * @param publisher
      */
-    public void setPublisher(Company publisher) {
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
-    public Company getDeveloper() {
+    public String getDeveloper() {
         return this.developer;
     }
 
@@ -129,24 +130,30 @@ public class VideoGame implements Serializable {
      *
      * @param developer
      */
-    public void setDeveloper(Company developer) {
+    public void setDeveloper(String developer) {
         this.developer = developer;
     }
 
     @Override
     public String toString() {
 
-        return String.format("Name: %s%n"
-                + "Genre: %s%n"
-                + "Year: %s%n"
-                + "Rating: %.1f%n"
-                + "ESRB: %s%n"
-                + "Platform(s): %s%n"
-                + "Publisher: %s%n"
-                + "Developer: %s%n",
-                this.name, this.genre, this.releaseDate, this.rating,
-                this.esrb.getAgeRange(), this.platform, this.publisher,
-                this.developer
+        return String.format(
+                "%-15s%s%n"
+                + "%-15s%s%n"
+                + "%-15s%s%n"
+                + "%-15s%d%n"
+                + "%-15s%s%n"
+                + "%-15s%s%n"
+                + "%-15s%s%n"
+                + "%-15s%s%n",
+                "Name:", this.name,
+                "Genre:", this.genre,
+                "Release Date:", this.releaseDate,
+                "Rating:", this.rating,
+                "ESRB:", this.esrb.getAgeRange(),
+                "Platform:", this.platform.getName(),
+                "Publisher:", this.publisher,
+                "Developer:", this.developer
         );
     }
 

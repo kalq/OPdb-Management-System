@@ -61,10 +61,19 @@ public class VideoGameList {
         String gameList = "";
 
         for (VideoGame game : this.games) {
-            gameList += game + " ";
+            gameList += game  + "\n";
         }
 
         return gameList.trim();
     }
 
+    public String reverseToString() {
+        String gameList = "";
+        
+        for(int i = this.games.size() - 1; i >= 0; i--) {
+            gameList += this.games.get(i) + "\n";
+        }
+        
+        return gameList.trim();
+    }
 }

@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.text.Font;
 import javafx.stage.*;
 import poojas.angels.*;
 
@@ -41,8 +42,6 @@ public class HomeController implements Initializable {
         fxStyles();
         homePage_events();
 
-        FileManager.readDatabase();
-        
         /* Write Records
         
         
@@ -52,11 +51,16 @@ public class HomeController implements Initializable {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }/**/
         
-        VideoGameList gameList = FileManager.getGameList();
+        FileManager.readDatabase();
         
-        gameList.getGames().forEach((game) -> {
+        VideoGameList gameList = FileManager.getGameList();
+
+        lblNewRecords.setText(gameList.reverseToString());
+        lblOldRecords.setText(gameList.toString());
+        
+        /*gameList.getGames().forEach((game) -> {
             lblOldRecords.setText(lblOldRecords.getText() + game.getName());
-        });
+        });*/
     }
 
     /**
