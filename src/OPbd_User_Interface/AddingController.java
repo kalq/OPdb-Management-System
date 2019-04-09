@@ -33,9 +33,12 @@ public class AddingController implements Initializable {
 
     @FXML
     private void addAction() {
-        VideoGame game = new VideoGame(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
-                dateToString(releaseDate), Integer.parseInt(lblCount.getText()), ESRB.valueOf(cmbRating.getSelectionModel().getSelectedItem().toString()),
-                Platform.valueOf(cmbPlatform.getSelectionModel().getSelectedItem().toString()), txtPublisher.getText(), txtDeveloper.getText());
+        FileManager.getGameList().addGame(
+                new VideoGame(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
+                        dateToString(releaseDate), Integer.parseInt(lblCount.getText()),
+                        ESRB.valueOf(cmbRating.getSelectionModel().getSelectedItem().toString()),
+                        Platform.valueOf(cmbPlatform.getSelectionModel().getSelectedItem().toString()),
+                        txtPublisher.getText(), txtDeveloper.getText()));
     }
 
     @FXML
