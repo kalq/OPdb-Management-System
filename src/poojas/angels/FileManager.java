@@ -59,21 +59,13 @@ public class FileManager {
         raf.seek(position);
 
         String name = FixedLengthStringIO.readFixedLengthString(NAME_SIZE, raf).trim();
-        System.out.println(name);
         String genre = FixedLengthStringIO.readFixedLengthString(GENRE_SIZE, raf).trim();
-        System.out.println(genre);
         String date = FixedLengthStringIO.readFixedLengthString(DATE_SIZE, raf).trim();
-        System.out.println(date);
         String rating = FixedLengthStringIO.readFixedLengthString(RATING_SIZE, raf).trim();
-        System.out.println(rating);
         String esrb = FixedLengthStringIO.readFixedLengthString(ESRB_SIZE, raf).trim();
-        System.out.println(esrb);
         String platform = FixedLengthStringIO.readFixedLengthString(PLATFORM_SIZE, raf).trim();
-        System.out.println(platform);
         String publisher = FixedLengthStringIO.readFixedLengthString(PUBLISHER_SIZE, raf).trim();
-        System.out.println(publisher);
         String developer = FixedLengthStringIO.readFixedLengthString(DEVELOPER_SIZE, raf).trim();
-        System.out.println(developer);
 
         gameList.addGame(new VideoGame(name, genre, date, Integer.parseInt(rating), ESRB.valueOf(esrb), Platform.valueOf(platform), publisher, developer));
     }
@@ -85,11 +77,13 @@ public class FileManager {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (int i = 0; i < raf.length() - RECORD_SIZE; i += RECORD_SIZE * 2) {
+        for (int i = 0; i <= raf.length(); i += RECORD_SIZE * 2) {
             raf.seek(i);
-            String record = FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf);
+            String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
+            
+            if (record.trim().isEmpty()) {
+                raf.seek(i);
 
-            if (!record.trim().isEmpty()) {
                 FixedLengthStringIO.writeFixedLengthString(name, NAME_SIZE, raf);
                 FixedLengthStringIO.writeFixedLengthString(genre, GENRE_SIZE, raf);
                 FixedLengthStringIO.writeFixedLengthString(date, DATE_SIZE, raf);
