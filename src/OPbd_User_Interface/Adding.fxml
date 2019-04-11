@@ -47,7 +47,7 @@
         <!--Group which contains Add and Cancel Buttons-->
         <Group layoutX="180" layoutY="650">            
             <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
-            <Button layoutX="550" fx:id="btnAdd" text="Add Game" />
+            <Button layoutX="550" fx:id="btnAdd" onAction="#addAction" text="Add Game" />
         </Group>
     </children>
 </AnchorPane>

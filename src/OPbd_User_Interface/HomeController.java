@@ -44,7 +44,7 @@ public class HomeController implements Initializable {
 
         /* Write Records
         
-        */
+        
         try {
             FileManager.writeRecord("Overwatch", "fps", "24/05/2016", "9", "TEEN", "WINDOWS", "Blizzard", "Blizzard");
         } catch (IOException ex) {

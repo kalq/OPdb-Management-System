@@ -28,10 +28,11 @@ public class ConfirmDeleteController implements Initializable {
      */
     @FXML
     private void deleteAction(ActionEvent event){
-        FileManager.deleteRecord(Integer.parseInt(lblIndex.getText()) - 1);
+        FileManager.deleteRecord(Integer.parseInt(lblIndex.getText()));
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
+
     /**
      * Initializes the controller class.
      */

@@ -1,5 +1,6 @@
 package OPbd_User_Interface;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -32,13 +33,36 @@ public class AddingController implements Initializable {
     private Button btnCancel, btnAdd;
 
     @FXML
-    private void addAction() {
+    private void addAction() throws IOException {
+        
+        ESRB esrb = null;
+        for(ESRB value : ESRB.values()) {
+            if(value.getAgeRange().equalsIgnoreCase(cmbRating.getSelectionModel().getSelectedItem().toString()))
+                esrb = value;
+        }
+        
+        Platform platform = null;
+        for(Platform value : Platform.values()) {
+            if(value.getName().equalsIgnoreCase(cmbPlatform.getSelectionModel().getSelectedItem().toString()))
+                platform = value;
+        }
+        
         FileManager.getGameList().addGame(
                 new VideoGame(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
                         dateToString(releaseDate), Integer.parseInt(lblCount.getText()),
-                        ESRB.valueOf(cmbRating.getSelectionModel().getSelectedItem().toString()),
-                        Platform.valueOf(cmbPlatform.getSelectionModel().getSelectedItem().toString()),
+                        esrb,
+                        platform,
                         txtPublisher.getText(), txtDeveloper.getText()));
+        
+        
+        FileManager.writeRecord(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
+                        dateToString(releaseDate), lblCount.getText(),
+                        cmbRating.getSelectionModel().getSelectedItem().toString(),
+                        cmbPlatform.getSelectionModel().getSelectedItem().toString(),
+                        txtPublisher.getText(), txtDeveloper.getText());
+
+        Stage stage = (Stage) btnAdd.getScene().getWindow(); //Grabs the Adding.fxml window
+        stage.close(); //Closes FXML page
     }
 
     @FXML

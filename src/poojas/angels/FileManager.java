@@ -107,13 +107,71 @@ public class FileManager {
         }
 
         try {
-            raf.seek(index * (RECORD_SIZE * 2));
+            raf.seek(index - 1 * (RECORD_SIZE * 2));
             FixedLengthStringIO.writeFixedLengthString("", RECORD_SIZE, raf);
+            
+            raf.close();
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public static void editRecord(int index, String field, String data) {
+        try {
+            raf = new RandomAccessFile(DATABASE, "rw");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            raf.seek(index - 1 * (RECORD_SIZE * 2));
+
+            if(!field.equalsIgnoreCase("name"))
+                raf.seek(raf.getFilePointer() + NAME_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, NAME_SIZE, raf);
+
+            if (!field.equalsIgnoreCase("genre"))
+                raf.seek(raf.getFilePointer() + GENRE_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, GENRE_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("date"))
+                raf.seek(raf.getFilePointer() + DATE_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, DATE_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("rating"))
+                raf.seek(raf.getFilePointer() + RATING_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, RATING_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("esrb"))
+                raf.seek(raf.getFilePointer() + ESRB_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, ESRB_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("platform"))
+                raf.seek(raf.getFilePointer() + PLATFORM_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, PLATFORM_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("publisher"))
+                raf.seek(raf.getFilePointer() + PUBLISHER_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, PUBLISHER_SIZE, raf);
+            
+            if (!field.equalsIgnoreCase("developer"))
+                raf.seek(raf.getFilePointer() + DEVELOPER_SIZE);
+            else
+                FixedLengthStringIO.writeFixedLengthString(data, DEVELOPER_SIZE, raf);
+            
+            raf.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public static VideoGameList getGameList() {
         return gameList;
     }
