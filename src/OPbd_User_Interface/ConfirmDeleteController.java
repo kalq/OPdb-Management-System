@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import poojas.angels.FileManager;
 
 /**
  * FXML Controller class
@@ -26,7 +27,7 @@ public class ConfirmDeleteController implements Initializable {
      */
     @FXML
     private void deleteAction(){
-        
+        FileManager.deleteRecord(Integer.parseInt(lblIndex.getText()) - 1);
     }
     /**
      * Initializes the controller class.

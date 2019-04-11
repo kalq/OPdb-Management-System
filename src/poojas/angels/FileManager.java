@@ -85,17 +85,39 @@ public class FileManager {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        raf.seek(raf.length());
-        FixedLengthStringIO.writeFixedLengthString(name, NAME_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(genre, GENRE_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(date, DATE_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(rating, RATING_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(esrb, ESRB_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(platform, PLATFORM_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(publisher, PUBLISHER_SIZE, raf);
-        FixedLengthStringIO.writeFixedLengthString(developer, DEVELOPER_SIZE, raf);
+        for (int i = 0; i < raf.length() - RECORD_SIZE; i += RECORD_SIZE * 2) {
+            raf.seek(i);
+            String record = FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf);
+
+            if (!record.trim().isEmpty()) {
+                FixedLengthStringIO.writeFixedLengthString(name, NAME_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(genre, GENRE_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(date, DATE_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(rating, RATING_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(esrb, ESRB_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(platform, PLATFORM_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(publisher, PUBLISHER_SIZE, raf);
+                FixedLengthStringIO.writeFixedLengthString(developer, DEVELOPER_SIZE, raf);
+                break;
+            }
+        }
 
         raf.close();
+    }
+
+    public static void deleteRecord(int index) {
+        try {
+            raf = new RandomAccessFile(DATABASE, "rw");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            raf.seek(index * (RECORD_SIZE * 2));
+            FixedLengthStringIO.writeFixedLengthString("", RECORD_SIZE, raf);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static VideoGameList getGameList() {
