@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,6 +53,11 @@ public class DeletingController implements Initializable {
     private void deleteAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ConfirmDelete.fxml"));
         Parent root = (Parent) fxmlLoader.load();
+        
+        // Pass index to confirm page
+        ConfirmDeleteController confirmDeleteController = fxmlLoader.getController();
+        confirmDeleteController.transferIndex(txtSelectIndex.getText());
+        
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initStyle(StageStyle.DECORATED);

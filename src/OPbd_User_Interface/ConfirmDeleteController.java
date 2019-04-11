@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  */
 public class ConfirmDeleteController implements Initializable {
 
+    @FXML private Label lblIndex;
     @FXML private Button btnCancel, btnDelete;
     
     @FXML
@@ -33,6 +34,9 @@ public class ConfirmDeleteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
     
+    public void transferIndex(String index) {
+        lblIndex.setText(index);
+    }
 }
