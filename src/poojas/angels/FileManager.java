@@ -42,7 +42,13 @@ public class FileManager {
 
         try {
             for (int i = 0; i < raf.length() - RECORD_SIZE; i += RECORD_SIZE * 2) {
-                readRecord(i);
+                raf.seek(i);
+
+                String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
+                
+                if (!record.trim().isEmpty()) {
+                    readRecord(i);
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +86,7 @@ public class FileManager {
         for (int i = 0; i <= raf.length(); i += RECORD_SIZE * 2) {
             raf.seek(i);
             String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
-            
+
             if (record.trim().isEmpty()) {
                 raf.seek(i);
 
@@ -107,9 +113,9 @@ public class FileManager {
         }
 
         try {
-            raf.seek(index - 1 * (RECORD_SIZE * 2));
+            raf.seek((index - 1) * (RECORD_SIZE * 2));
             FixedLengthStringIO.writeFixedLengthString("", RECORD_SIZE, raf);
-            
+
             raf.close();
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,43 +132,51 @@ public class FileManager {
         try {
             raf.seek((index - 1) * (RECORD_SIZE * 2));
 
-            if(!field.equalsIgnoreCase("name"))
+            if (!field.equalsIgnoreCase("name")) {
                 raf.seek(raf.getFilePointer() + NAME_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, NAME_SIZE, raf);
+            }
 
-            if (!field.equalsIgnoreCase("genre"))
+            if (!field.equalsIgnoreCase("genre")) {
                 raf.seek(raf.getFilePointer() + GENRE_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, GENRE_SIZE, raf);
-            
-            if (!field.equalsIgnoreCase("date"))
+            }
+
+            if (!field.equalsIgnoreCase("date")) {
                 raf.seek(raf.getFilePointer() + DATE_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, DATE_SIZE, raf);
-            
-            if (!field.equalsIgnoreCase("rating"))
+            }
+
+            if (!field.equalsIgnoreCase("rating")) {
                 raf.seek(raf.getFilePointer() + RATING_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, RATING_SIZE, raf);
-            
-            if (!field.equalsIgnoreCase("esrb"))
+            }
+
+            if (!field.equalsIgnoreCase("esrb")) {
                 raf.seek(raf.getFilePointer() + ESRB_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, ESRB_SIZE, raf);
-            
-            if (!field.equalsIgnoreCase("platform"))
+            }
+
+            if (!field.equalsIgnoreCase("platform")) {
                 raf.seek(raf.getFilePointer() + PLATFORM_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, PLATFORM_SIZE, raf);
-            
-            if (!field.equalsIgnoreCase("publisher"))
+            }
+
+            if (!field.equalsIgnoreCase("publisher")) {
                 raf.seek(raf.getFilePointer() + PUBLISHER_SIZE * 2);
-            else
+            } else {
                 FixedLengthStringIO.writeFixedLengthString(data, PUBLISHER_SIZE, raf);
-            
-            if (field.equalsIgnoreCase("developer"))
+            }
+
+            if (field.equalsIgnoreCase("developer")) {
                 FixedLengthStringIO.writeFixedLengthString(data, DEVELOPER_SIZE, raf);
+            }
 
             raf.close();
         } catch (IOException ex) {
