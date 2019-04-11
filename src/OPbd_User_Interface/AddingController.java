@@ -57,8 +57,8 @@ public class AddingController implements Initializable {
         
         FileManager.writeRecord(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
                         dateToString(releaseDate), lblCount.getText(),
-                        cmbRating.getSelectionModel().getSelectedItem().toString(),
-                        cmbPlatform.getSelectionModel().getSelectedItem().toString(),
+                        esrb.toString(),
+                        platform.toString(),
                         txtPublisher.getText(), txtDeveloper.getText());
 
         Stage stage = (Stage) btnAdd.getScene().getWindow(); //Grabs the Adding.fxml window
