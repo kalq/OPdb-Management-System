@@ -55,7 +55,7 @@ public class DeletingController implements Initializable {
         
         // Pass index to confirm page
         ConfirmDeleteController confirmDeleteController = fxmlLoader.getController();
-        confirmDeleteController.transferIndex(txtSelectIndex.getText());
+        confirmDeleteController.setIndex(txtSelectIndex.getText());
         
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);

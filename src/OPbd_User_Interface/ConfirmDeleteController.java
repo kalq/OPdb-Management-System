@@ -2,6 +2,7 @@ package OPbd_User_Interface;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -26,8 +27,10 @@ public class ConfirmDeleteController implements Initializable {
      * @method deleteAction in ConfirmDeleteController sets the fixed string of that record to null and changes indexes
      */
     @FXML
-    private void deleteAction(){
+    private void deleteAction(ActionEvent event){
         FileManager.deleteRecord(Integer.parseInt(lblIndex.getText()) - 1);
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
     /**
      * Initializes the controller class.
@@ -37,7 +40,7 @@ public class ConfirmDeleteController implements Initializable {
         // TODO
     }
     
-    public void transferIndex(String index) {
+    public void setIndex(String index) {
         lblIndex.setText(index);
     }
 }
