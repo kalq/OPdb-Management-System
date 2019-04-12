@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--This page is for editing the Publisher data in a specified record by index-->
+<AnchorPane id="rootPane" prefHeight="500" prefWidth="700" xmlns:fx="http://javafx.com/fxml/1" fx:controller="multipleEditFXML.EditPublisherController">
+    <children>
+        <Label layoutX="70" layoutY="20" fx:id="lblTitle" text="Editing Title Of Index" underline="true" />
+        <Label layoutX="340" layoutY="90" fx:id="lblIndex" text="0" />
+        <Group layoutX="120" layoutY="160">
+            <Label layoutX="50" layoutY="0" fx:id="lblSelectIndex" text="Set Game Publisher" />
+            <TextField layoutX="60" layoutY="70" fx:id="txtPublisher" />
+        </Group>
+        <Group layoutX="50" layoutY="330">
+            <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
+            <Button layoutX="250" fx:id="btnEdit" onAction="#confirmAction" text="Confirm Edit" />
+        </Group>
+    </children>
+</AnchorPane>
