@@ -15,28 +15,32 @@
         <HBox fx:id="topImages">
             <!--OPbd Logo-->
             <ImageView fx:id="logo" fitHeight="220" fitWidth="220" />
-            <!--View Mode-->
-            <ImageView fx:id="viewing" fitHeight="190" fitWidth="170" />
-            <!--Delete Data-->
-            <ImageView fx:id="deleting" fitHeight="195" fitWidth="180" />
-        </HBox>
-            
-        <Group layoutX="60" layoutY="230">
-            <!--Newest Games-->
-            <Rectangle fx:id="newGame" width="850" height="580" />
-            <Label layoutX="230" fx:id="lblNewest" text="Newest Games" />
-            <Label layoutX="0" layoutY="50" fx:id="lblNewRecords" /> <!--TODO: Must read from file's newest records-->
-            <!--Oldest Games-->
-            <Rectangle layoutX="950" fx:id="oldGame" width="850" height="580" />
-            <Label layoutX="1180" fx:id="lblOldest" text="Oldest Games" />
-            <Label layoutX="1180" layoutY="50" fx:id="lblOldRecords" /> <!--TODO: Must read from file's newest records-->
-        </Group>
-            
-        <HBox layoutX="500" layoutY="825" fx:id="bottomImages">
             <!--Add Data-->
             <ImageView fx:id="adding" fitHeight="160" fitWidth="140" />
             <!--Edit Data-->
             <ImageView fx:id="editing" fitHeight="170" fitWidth="160" />
+            <!--Delete Data-->
+            <ImageView fx:id="deleting" fitHeight="175" fitWidth="150" />
+            <!--Refresh Table Button-->
+            <Button fx:id="btnRefresh" onAction="#refreshPage" text="Refresh Page" />
         </HBox>
+            
+        <Group layoutX="100" layoutY="250">
+            <Label fx:id="lblTableTitle" style="-fx-font: NORMAL 20 Tahoma;" text="OPbd Stored Games" />
+            <TableView fx:id="dataTable" prefHeight="700">
+                <columns>
+                    <TableColumn prefWidth="100" fx:id="columnIndex" text="Index" />
+                    <TableColumn prefWidth="200" fx:id="columnTitle" text="Title" />
+                    <TableColumn prefWidth="200" fx:id="columnGenre" text="Genre" />
+                    <TableColumn prefWidth="200" fx:id="columnPublisher" text="Publisher" />
+                    <TableColumn prefWidth="200" fx:id="columnDeveloper" text="Developer" />
+                    <TableColumn prefWidth="200" fx:id="columnPlatform" text="Platform" />
+                    <TableColumn prefWidth="200" fx:id="columnRelease" text="Date" />
+                    <TableColumn prefWidth="200" fx:id="columnESRB" text="ESRB" />
+                    <TableColumn prefWidth="200" fx:id="columnRating" text="Rating" />
+                </columns>  
+                <!--Table items must be configured with records in the controller-->
+            </TableView>
+        </Group>
     </children>    
 </AnchorPane>

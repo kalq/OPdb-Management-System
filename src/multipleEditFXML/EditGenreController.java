@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import poojas.angels.FileManager;
 
 /**
  * FXML Controller class
@@ -24,20 +25,22 @@ public class EditGenreController implements Initializable {
     private Button btnCancel, btnEdit;
     @FXML
     private ComboBox cmbGenre;
-    
+    @FXML
+    private Label lblIndex;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbGenre.getItems().addAll(
-                "Action & Adventure",
-                "Role-Playing Game",
-                "Massive Online Multiplayer",
-                "First-Person Shooter",
-                "Indie Game"
+                "Action",
+                "RPG",
+                "MMO",
+                "Shooter",
+                "Indie"
         );
-    }    
+    }
 
     @FXML
     private void cancelAction() {
@@ -47,6 +50,13 @@ public class EditGenreController implements Initializable {
 
     @FXML
     private void confirmAction(ActionEvent event) {
+
+        FileManager.editRecord(Integer.parseInt(lblIndex.getText()), "genre", cmbGenre.getSelectionModel().getSelectedItem().toString());
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
-    
+
+    public void transferIndex(String index) {
+        lblIndex.setText(index);
+    }
 }

@@ -20,7 +20,7 @@ public class ConfirmDeleteController implements Initializable {
     
     @FXML
     private void cancelAction(){
-        Stage stage = (Stage) btnCancel.getScene().getWindow(); //Grabs the Deleting.fxml window
+        Stage stage = (Stage) btnCancel.getScene().getWindow(); 
         stage.close();
     }
     /**
@@ -29,6 +29,7 @@ public class ConfirmDeleteController implements Initializable {
     @FXML
     private void deleteAction(ActionEvent event){
         FileManager.deleteRecord(Integer.parseInt(lblIndex.getText()));
+        FileManager.resetIndex();
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
@@ -38,7 +39,7 @@ public class ConfirmDeleteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
     
     public void setIndex(String index) {

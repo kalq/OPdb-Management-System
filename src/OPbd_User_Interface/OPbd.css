@@ -9,20 +9,12 @@
 }
 
 #topImages{
-    -fx-spacing: 500px;
+    -fx-spacing: 200px;
+    -fx-padding: 10px;
 }
-#bottomImages{
-    -fx-spacing: 570px;
-}
-#lblNewest, #lblOldest, #lblTitle, #lblIndex, #lblSearchBy, #lblSelect {
+#lblTitle, #lblIndex, #lblSearchBy, #lblSelect {
     -fx-font-size: 60px;
     -fx-text-fill: rgb(0, 255, 20);
-}
-#viewing {
-    -fx-image: url("../icons/viewAll.png");
-}
-#search {
-    -fx-image: url("../icons/search.png");
 }
 #logo {
     -fx-image: url("../icons/logo.png");
@@ -36,8 +28,8 @@
 #deleting {
     -fx-image: url("../icons/deleting.png");
 }
-#viewing:hover {
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,50) , 0,0,0,1 );
+.list-cell{
+    -fx-text-fill: rgb(0,255,20);
 }
 
 /*Adding Pop-Up form*/
@@ -53,14 +45,14 @@
     -fx-font-size: 32px;
     -fx-text-fill: rgb(0,255,20);
 }
-#btnAdd, #btnCancel, #btnDelete, #btnEdit {
+#btnAdd, #btnCancel, #btnDelete, #btnEdit,#btnRefresh {
     -fx-background-color: transparent;
     -fx-border-color: rgb(0,255,20);
     -fx-border-radius: 10px;
     -fx-font-size: 50px;
     -fx-text-fill: rgb(0,255,20);
 }
-#btnAdd:hover, #btnCancel:hover, #btnDelete:hover, #btnEdit:hover {
+#btnAdd:hover, #btnCancel:hover, #btnDelete:hover, #btnEdit:hover,#btnRefresh:hover {
     -fx-background-color: rgb(0,80,7);
     -fx-cursor: HAND;
 }
@@ -85,9 +77,6 @@
 #lblSelect {
     -fx-font-size: 50px;
 }
-#viewAllImages {
-    -fx-spacing: 300px;
-}
 
 /*Table Styling Reference: https://stackoverflow.com/questions/33938811/styling-a-tableview-in-css-javafx*/
 .root{
@@ -101,9 +90,6 @@
 .table-view:focused{
     -fx-background-color: transparent;
 }
-
-/* Spaltenköpfe
-    Struktur column-header-background -> column-header */
 
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
@@ -121,7 +107,7 @@
 
 .table-view .table-cell{
     -fx-text-fill: rgb(0,255,20);
-    -fx-font-size: 30px;
+    -fx-font-size: 25px;
 }
 
 .table-row-cell{

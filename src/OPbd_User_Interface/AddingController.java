@@ -20,49 +20,70 @@ import poojas.angels.*;
 public class AddingController implements Initializable {
 
     @FXML
-    private Label lblCount; //TODO --> extract Slider number for file writing
+    private Label lblCount, lblIndex;
     @FXML
     private Slider sliderGameRate; //This is just the slider, must extract lblCount number
     @FXML
-    private ComboBox cmbRating, cmbGenre, cmbPlatform; //TODO --> extract dropbox for file writing
+    private ComboBox cmbRating, cmbGenre, cmbPlatform;
     @FXML
-    private DatePicker releaseDate; //TODO --> extract date as string for records
+    private DatePicker releaseDate;
     @FXML
     private TextField txtGameName, txtPublisher, txtDeveloper;
     @FXML
     private Button btnCancel, btnAdd;
 
+    /**
+     * @method addAction() is for checking and validating the new data entered
+     * before writing it in fixed record size.
+     * @throws IOException
+     */
     @FXML
     private void addAction() throws IOException {
-        
-        ESRB esrb = null;
-        for(ESRB value : ESRB.values()) {
-            if(value.getAgeRange().equalsIgnoreCase(cmbRating.getSelectionModel().getSelectedItem().toString()))
-                esrb = value;
-        }
-        
-        Platform platform = null;
-        for(Platform value : Platform.values()) {
-            if(value.getName().equalsIgnoreCase(cmbPlatform.getSelectionModel().getSelectedItem().toString()))
-                platform = value;
-        }
-        
-        FileManager.getGameList().addGame(
-                new VideoGame(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
-                        dateToString(releaseDate), Integer.parseInt(lblCount.getText()),
-                        esrb,
-                        platform,
-                        txtPublisher.getText(), txtDeveloper.getText()));
-        
-        
-        FileManager.writeRecord(txtGameName.getText(),cmbGenre.getSelectionModel().getSelectedItem().toString(),
-                        dateToString(releaseDate), lblCount.getText(),
-                        esrb.toString(),
-                        platform.toString(),
-                        txtPublisher.getText(), txtDeveloper.getText());
 
-        Stage stage = (Stage) btnAdd.getScene().getWindow(); //Grabs the Adding.fxml window
-        stage.close(); //Closes FXML page
+        //-------Data Validation Section--------\\
+        try { //Any errors in this try block will be caught and an error message will pop up
+
+            if (txtGameName.getText().equals("") || txtPublisher.getText().equals("") || txtDeveloper.getText().equals("")) {
+                throw new Exception(); //Because these text fields are empty
+            }
+
+            ESRB esrb = null;
+            for (ESRB value : ESRB.values()) {
+                if (value.getAgeRange().equalsIgnoreCase(cmbRating.getSelectionModel().getSelectedItem().toString())) {
+                    esrb = value;
+                }
+            }
+
+            Platform platform = null;
+            for (Platform value : Platform.values()) {
+                if (value.getName().equalsIgnoreCase(cmbPlatform.getSelectionModel().getSelectedItem().toString())) {
+                    platform = value;
+                }
+            }
+
+            FileManager.getGameList().addGame(
+                    new VideoGame(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
+                            dateToString(releaseDate), Integer.parseInt(lblCount.getText()),
+                            esrb,
+                            platform,
+                            txtPublisher.getText(), txtDeveloper.getText()));
+
+            FileManager.writeRecord(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
+                    dateToString(releaseDate), lblCount.getText(),
+                    esrb.toString(),
+                    platform.toString(),
+                    txtPublisher.getText(), txtDeveloper.getText());
+
+            FileManager.resetIndex();
+
+            Stage stage = (Stage) btnAdd.getScene().getWindow(); //Grabs the Adding.fxml window
+            stage.close(); //Closes FXML page
+        } catch (Exception e) { //The only case where this won't work is if a form option wasn't filled.
+            Alert myAlert = new Alert(Alert.AlertType.ERROR);
+            myAlert.setTitle("Error: Empty Field(s)");
+            myAlert.setContentText("Please make sure to fill in all form fields before adding them to OPdb's records.");
+            myAlert.showAndWait();
+        }
     }
 
     @FXML
@@ -79,12 +100,31 @@ public class AddingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        releaseDate.setEditable(false); //User can only select date, not type in textfield
         //For showing integer value of slider, there must be an event listener. Otherwise it's a large double number by default.
         sliderGameRate.valueProperty().addListener(new ChangeListener() { //Anonymous Event using ChangeListener class
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) { //Requires 3 arguments for ChangeListener to work
                 lblCount.textProperty().setValue(String.valueOf((int) sliderGameRate.getValue()));
+            }
+        });
+
+        //For limiting the Publisher limit to only 20 characters to be typed
+        txtGameName.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("^[ a-zA-Z0-9]{0,20}$")) { //Only Letters up to 20 characters
+                txtGameName.setText(oldValue);
+            }
+        });
+        //For limiting the Title limit to only 20 characters to be typed
+        txtPublisher.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("^[a-zA-Z]{0,20}$")) {
+                txtPublisher.setText(oldValue);
+            }
+        });
+        //For limiting the Developer limit to only 20 characters to be typed
+        txtDeveloper.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("^[a-zA-Z]{0,20}$")) {
+                txtDeveloper.setText(oldValue);
             }
         });
 
@@ -99,11 +139,11 @@ public class AddingController implements Initializable {
         );
         //ComboBox Genre items
         cmbGenre.getItems().addAll(
-                "Action & Adventure",
-                "Role-Playing Game",
-                "Massive Online Multiplayer",
-                "First-Person Shooter",
-                "Indie Game"
+                "Action",
+                "RPG",
+                "MMO",
+                "Shooter",
+                "Indie"
         );
         //ComboBox Platform items
         cmbPlatform.getItems().addAll(
@@ -127,6 +167,11 @@ public class AddingController implements Initializable {
             so they must be in initialize method.*/
     }
 
+    /**
+     * @method dateToString() converts DatePicker object's value to a string
+     * @param date
+     * @return
+     */
     public String dateToString(DatePicker date) {
         String pattern = "dd/MM/yyyy";
         return date.getValue().format(DateTimeFormatter.ofPattern(pattern));

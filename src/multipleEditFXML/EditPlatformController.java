@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package multipleEditFXML;
 
 import java.net.URL;
@@ -12,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import poojas.angels.FileManager;
+import poojas.angels.Platform;
 
 /**
  * FXML Controller class
@@ -24,6 +21,8 @@ public class EditPlatformController implements Initializable {
     private ComboBox cmbPlatform;
     @FXML
     private Button btnCancel, btnEdit;
+    @FXML
+    private Label lblIndex;
 
     /**
      * Initializes the controller class.
@@ -59,6 +58,19 @@ public class EditPlatformController implements Initializable {
 
     @FXML
     private void confirmAction(ActionEvent event) {
+        Platform platform = null;
+        for(Platform value : Platform.values()) {
+            if(value.getName().equalsIgnoreCase(cmbPlatform.getSelectionModel().getSelectedItem().toString()))
+                platform = value;
+        }
+        
+        FileManager.editRecord(Integer.parseInt(lblIndex.getText()), "platform", platform.toString());
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
+    }
+    
+    public void transferIndex(String index) {
+        lblIndex.setText(index);
     }
     
 }

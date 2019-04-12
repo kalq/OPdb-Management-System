@@ -9,19 +9,13 @@
 <!--This page is the main Deleting page for selecting the full record to wipe from OPdb's file-->
 <AnchorPane id="rootPane" prefHeight="500" prefWidth="500" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.DeletingController">
     <children>
-        <Label layoutX="290" layoutY="20" fx:id="lblSelect" text="Select..." />
+        <Label layoutX="240" layoutY="20" fx:id="lblSelect" text="Select..." />
         <!--Prompts user to select the index they wish to delete-->
-        <Group layoutX="20" layoutY="100">
+        <Group layoutX="210" layoutY="100">
             <Label layoutX="60" layoutY="0" fx:id="lblSelectIndex" text="Index" />
-            <TextField layoutX="60" layoutY="70" fx:id="txtSelectIndex" text="00" />
+            <TextField layoutX="60" layoutY="70" fx:id="txtSelectIndex" />
         </Group>
-        <Label layoutX="230" layoutY="150" fx:id="lblSearchBy" text="OR" />
-        <!--Prompts user to select the game title they wish to delete instead of index-->
-        <Group layoutX="300" layoutY="100">
-            <Label layoutX="190" layoutY="0" fx:id="lblSelectTitle" text="Title" />
-            <TextField layoutX="60" layoutY="70" fx:id="txtSelectTitle" />
-        </Group>
-        <Group layoutX="110" layoutY="330">
+        <Group layoutX="10" layoutY="340">
             <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
             <Button layoutX="350" fx:id="btnDelete" onAction="#deleteAction" text="Delete" />
         </Group>

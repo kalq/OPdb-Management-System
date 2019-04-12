@@ -7,6 +7,7 @@ package multipleEditFXML;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import poojas.angels.FileManager;
 
 /**
  * FXML Controller class
@@ -25,17 +27,24 @@ public class EditPublisherController implements Initializable {
     @FXML
     private TextField txtSelectIndex;
     @FXML
-    private Label lblWhichCat;
+    private Label lblWhichCat, lblIndex;
     @FXML
     private Button btnCancel, btnEdit;
+    @FXML
+    TextField txtPublisher;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        //For limiting the Title limit to only 20 characters to be typed
+        txtPublisher.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("^[a-zA-Z]{0,20}$")) {
+                txtPublisher.setText(oldValue);
+            }
+        });
+    }
 
     @FXML
     private void cancelAction() {
@@ -45,6 +54,13 @@ public class EditPublisherController implements Initializable {
 
     @FXML
     private void confirmAction(ActionEvent event) {
+        FileManager.editRecord(Integer.parseInt(lblIndex.getText()), "publisher", txtPublisher.getText());
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
-    
+
+    public void transferIndex(String index) {
+        lblIndex.setText(index);
+    }
+
 }

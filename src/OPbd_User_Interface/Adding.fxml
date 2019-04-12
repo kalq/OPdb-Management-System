@@ -7,16 +7,12 @@
 <?import javafx.scene.layout.*?>
 
 <!--This FXML page is for appending an new record entry to our Random Access File--> 
-<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1200" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.AddingController">
+<AnchorPane fx:id="rootPane" prefHeight="700" prefWidth="1200" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OPbd_User_Interface.AddingController">
     <children>
-        <!--Specifies the last index that you'll append this new record to-->
-        <Group layoutX="250">
-            <Label layoutX="80" layoutY="20" fx:id="lblTitle" text="Next Available Index" underline="true" />
-            <Label layoutX="340" layoutY="90" fx:id="lblIndex" text="0" />
-        </Group>
+        <Label layoutX="310" layoutY="10" fx:id="lblTitle" text="Add To Game Records" underline="true" />
         
         <!--Entire GridPane is for adding game form-->
-        <GridPane layoutX="50" layoutY="220" hgap="4" vgap="4">
+        <GridPane layoutX="50" layoutY="140" hgap="4" vgap="4">
             <!--Title-->
             <Label GridPane.columnIndex="0" fx:id="lblGameName" text="Title: " />
             <TextField GridPane.columnIndex="1" fx:id="txtGameName" />
@@ -45,7 +41,7 @@
         </GridPane>
         
         <!--Group which contains Add and Cancel Buttons-->
-        <Group layoutX="180" layoutY="650">            
+        <Group layoutX="180" layoutY="550">            
             <Button layoutX="0" fx:id="btnCancel" onAction="#cancelAction" text="Cancel" />
             <Button layoutX="550" fx:id="btnAdd" onAction="#addAction" text="Add Game" />
         </Group>

@@ -13,7 +13,7 @@
         <Label layoutX="50" layoutY="20" fx:id="lblBeforeEdit" text="Before Editing..." />
         <Group layoutX="250" layoutY="120">
             <Label layoutX="0" layoutY="0" fx:id="lblSelectIndex" text="Select Index" />
-            <TextField layoutX="60" layoutY="70" fx:id="txtSelectIndex" text="00" />
+            <TextField layoutX="60" layoutY="70" fx:id="txtSelectIndex" />
         </Group>
         <Group layoutX="200" layoutY="320">
             <Label layoutX="0" layoutY="0" fx:id="lblWhichCat" text="Edit Which Category?" />

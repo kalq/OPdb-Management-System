@@ -12,6 +12,7 @@ public class VideoGame implements Serializable {
     private Platform platform;
     private String publisher;
     private String developer;
+    private int index;
 
     public VideoGame() {
     }
@@ -40,6 +41,14 @@ public class VideoGame implements Serializable {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     /**
