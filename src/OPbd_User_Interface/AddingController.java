@@ -41,12 +41,13 @@ public class AddingController implements Initializable {
     private void addAction() throws IOException {
 
         //-------Data Validation Section--------\\
-        try { //Any errors in this try block will be caught and an error message will pop up
-
-            if (txtGameName.getText().equals("") || txtPublisher.getText().equals("") || txtDeveloper.getText().equals("")) {
-                throw new Exception(); //Because these text fields are empty
-            }
-
+        if (txtGameName.getText().equals("") || txtPublisher.getText().equals("") || txtDeveloper.getText().equals("")) {
+            Alert myAlert = new Alert(Alert.AlertType.ERROR);
+            myAlert.setTitle("Error: Empty Field(s)");
+            myAlert.setContentText("Please make sure to fill in all form fields before adding them to OPdb's records.");
+            myAlert.showAndWait();
+        } else {
+System.out.println("hi");
             //Validates ESRB value that was entered
             ESRB esrb = null;
             for (ESRB value : ESRB.values()) {
@@ -54,7 +55,7 @@ public class AddingController implements Initializable {
                     esrb = value;
                 }
             }
-            
+
             //Validates Platform value entered
             Platform platform = null;
             for (Platform value : Platform.values()) {
@@ -62,7 +63,7 @@ public class AddingController implements Initializable {
                     platform = value;
                 }
             }
-            
+
             //Adds a new VideoGame object to the game list in FileManager
             FileManager.getGameList().addGame(
                     new VideoGame(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
@@ -70,7 +71,7 @@ public class AddingController implements Initializable {
                             esrb,
                             platform,
                             txtPublisher.getText(), txtDeveloper.getText()));
-            
+
             //Writes all the new data entered in the file.
             FileManager.writeRecord(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
                     dateToString(releaseDate), lblCount.getText(),
@@ -82,12 +83,8 @@ public class AddingController implements Initializable {
 
             Stage stage = (Stage) btnAdd.getScene().getWindow(); //Grabs the Adding.fxml window
             stage.close(); //Closes FXML page
-        } catch (Exception e) { //The only case where this won't work is if a form option wasn't filled.
-            Alert myAlert = new Alert(Alert.AlertType.ERROR);
-            myAlert.setTitle("Error: Empty Field(s)");
-            myAlert.setContentText("Please make sure to fill in all form fields before adding them to OPdb's records.");
-            myAlert.showAndWait();
         }
+
     }
 
     @FXML
