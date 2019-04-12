@@ -39,7 +39,9 @@ public class HomeController implements Initializable {
 
     /**
      * @method fillTable() creates the items using FXCollections, and targets
-     * all of the columns in the home page
+     * all of the columns in the home page. It creates a new VideoGame ArrayList
+     * and grabs the values using PropertyValueFactory.
+     *
      */
     private void fillTable() {
         ArrayList<VideoGame> games = new ArrayList<>(FileManager.getGameList().getGames());
@@ -57,6 +59,11 @@ public class HomeController implements Initializable {
 
     }
 
+    /**
+     * @method refreshPage() is an action event when the user clicks the refresh
+     * button.
+     * @param event
+     */
     @FXML
     private void refreshPage(ActionEvent event) {
         FileManager.readDatabase();
@@ -66,15 +73,16 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            homePage_events();
-            
-            FileManager.readDatabase();
-            fillTable();
+        homePage_events();
+
+        FileManager.readDatabase();
+        fillTable();
     }
 
     /**
      * @method This method contains all Mouse-Click EventHandlers for Adding,
-     * Editing and Deleting ImageViews
+     * Editing and Deleting ImageViews. Each MouseClick event creates a new FXML
+     * Loader and uses their FXML Documents for the new stage.
      */
     public void homePage_events() {
 

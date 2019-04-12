@@ -12,6 +12,7 @@ import java.util.logging.Logger;
  */
 public class FileManager {
 
+    //-----Fixed Character Size for each field in record-------\\
     private final static int NAME_SIZE = 20;
     private final static int GENRE_SIZE = 10;
     private final static int DATE_SIZE = 10;
@@ -20,17 +21,21 @@ public class FileManager {
     private final static int PLATFORM_SIZE = 10;
     private final static int PUBLISHER_SIZE = 20;
     private final static int DEVELOPER_SIZE = 20;
-
     private final static int RECORD_SIZE = NAME_SIZE + GENRE_SIZE
             + DATE_SIZE + RATING_SIZE + ESRB_SIZE + PLATFORM_SIZE
             + PUBLISHER_SIZE + DEVELOPER_SIZE;
 
+    //-----The path to OPdb's RandomAccessFile-------\\
     private final static String DATABASE = "database\\videogamelist.txt";
 
     private static RandomAccessFile raf;
     private static VideoGameList gameList;
     private static int index = 1;
 
+    /**
+     * @method readDatabase() goes through the entire videogamelist.txt records
+     * and reads all data for outputting to the TableView in the Home Page.
+     */
     public static void readDatabase() {
 
         try {
@@ -42,11 +47,14 @@ public class FileManager {
         gameList = new VideoGameList();
 
         try {
+            // Iterates through the database file
             for (int i = 0; i < raf.length() - RECORD_SIZE; i += RECORD_SIZE * 2) {
                 raf.seek(i);
 
                 String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
 
+                // Checks to see if record is empty, this happens if a previous
+                // record was deleted, only reads the record if it is not empty.
                 if (!record.trim().isEmpty()) {
                     readRecord(i);
                 }
@@ -66,9 +74,15 @@ public class FileManager {
         index = 1;
     }
 
+    /**
+     * Reads record as position
+     * @param position
+     * @throws IOException 
+     */
     public static void readRecord(long position) throws IOException {
         raf.seek(position);
 
+        // Reads each record field
         String name = FixedLengthStringIO.readFixedLengthString(NAME_SIZE, raf).trim();
         String genre = FixedLengthStringIO.readFixedLengthString(GENRE_SIZE, raf).trim();
         String date = FixedLengthStringIO.readFixedLengthString(DATE_SIZE, raf).trim();
@@ -78,13 +92,27 @@ public class FileManager {
         String publisher = FixedLengthStringIO.readFixedLengthString(PUBLISHER_SIZE, raf).trim();
         String developer = FixedLengthStringIO.readFixedLengthString(DEVELOPER_SIZE, raf).trim();
 
+        // Creates a new video game object with the read fields
         VideoGame g = new VideoGame(name, genre, date, Integer.parseInt(rating), ESRB.valueOf(esrb), Platform.valueOf(platform), publisher, developer);
         g.setIndex(index++);
 
+        // Adds game to game list
         gameList.addGame(g);
 
     }
 
+    /**
+     * Finds an empty record and writes to it
+     * @param name
+     * @param genre
+     * @param date
+     * @param rating
+     * @param esrb
+     * @param platform
+     * @param publisher
+     * @param developer
+     * @throws IOException 
+     */
     public static void writeRecord(String name, String genre, String date, String rating, String esrb, String platform, String publisher, String developer) throws IOException {
         try {
             raf = new RandomAccessFile(DATABASE, "rw");
@@ -92,6 +120,9 @@ public class FileManager {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        // Loops through the Database are writes a new record in the position of a
+        // previously deleted record. If none are found, adds record to the end of
+        // the file
         for (int i = 0; i <= raf.length(); i += RECORD_SIZE * 2) {
             raf.seek(i);
             String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
@@ -99,6 +130,7 @@ public class FileManager {
             if (record.trim().isEmpty()) {
                 raf.seek(i);
 
+                // Writes each field once a spot in the database is found then exits the loop
                 FixedLengthStringIO.writeFixedLengthString(name, NAME_SIZE, raf);
                 FixedLengthStringIO.writeFixedLengthString(genre, GENRE_SIZE, raf);
                 FixedLengthStringIO.writeFixedLengthString(date, DATE_SIZE, raf);
@@ -113,6 +145,10 @@ public class FileManager {
         raf.close();
     }
 
+    /**
+     * Loops to delete record
+     * @param index 
+     */
     public static void deleteRecord(int index) {
         try {
             raf = new RandomAccessFile(DATABASE, "rw");
@@ -121,6 +157,7 @@ public class FileManager {
         }
 
         try {
+            // Loops through the database to find the record with the right index. Replaces it with an empty record.
             for (int i = 0; i < raf.length(); i += RECORD_SIZE * 2) {
                 raf.seek((index - 1) * (RECORD_SIZE * 2));
                 String record = i < raf.length() ? FixedLengthStringIO.readFixedLengthString(RECORD_SIZE, raf) : "";
@@ -138,6 +175,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Gets index position, then seeks to appropriate field and edits it with provided data param
+     * @param index
+     * @param field
+     * @param data 
+     */
     public static void editRecord(int index, String field, String data) {
         try {
             raf = new RandomAccessFile(DATABASE, "rw");
@@ -145,6 +188,7 @@ public class FileManager {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        // Seeks to record index, then goes to field position
         try {
             raf.seek((index - 1) * (RECORD_SIZE * 2));
 

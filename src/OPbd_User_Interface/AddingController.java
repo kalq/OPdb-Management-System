@@ -47,27 +47,31 @@ public class AddingController implements Initializable {
                 throw new Exception(); //Because these text fields are empty
             }
 
+            //Validates ESRB value that was entered
             ESRB esrb = null;
             for (ESRB value : ESRB.values()) {
                 if (value.getAgeRange().equalsIgnoreCase(cmbRating.getSelectionModel().getSelectedItem().toString())) {
                     esrb = value;
                 }
             }
-
+            
+            //Validates Platform value entered
             Platform platform = null;
             for (Platform value : Platform.values()) {
                 if (value.getName().equalsIgnoreCase(cmbPlatform.getSelectionModel().getSelectedItem().toString())) {
                     platform = value;
                 }
             }
-
+            
+            //Adds a new VideoGame object to the game list in FileManager
             FileManager.getGameList().addGame(
                     new VideoGame(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
                             dateToString(releaseDate), Integer.parseInt(lblCount.getText()),
                             esrb,
                             platform,
                             txtPublisher.getText(), txtDeveloper.getText()));
-
+            
+            //Writes all the new data entered in the file.
             FileManager.writeRecord(txtGameName.getText(), cmbGenre.getSelectionModel().getSelectedItem().toString(),
                     dateToString(releaseDate), lblCount.getText(),
                     esrb.toString(),

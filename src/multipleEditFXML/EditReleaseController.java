@@ -43,9 +43,8 @@ public class EditReleaseController implements Initializable {
     }
 
     /**
-     * @method comfirmAction() in EditTitleController changes the Game Title of
-     * specified index
-     *
+     * @method confirmAction() uses the editRecord method from FileManager class
+     * to make changes after they confirm the edit.
      * @param event
      */
     @FXML

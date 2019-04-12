@@ -192,7 +192,7 @@ public class EditingController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //For limiting the index value to only two characters and numbers only
         txtSelectIndex.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("^[0-9]{0,2}$")) {
+            if (!newValue.matches("^[0-9]{0,2}$")) { //REGEX for only nymber up to 2 characters long
                 txtSelectIndex.setText(oldValue);
             }
         });

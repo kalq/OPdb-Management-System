@@ -33,7 +33,7 @@ public class DeletingController implements Initializable {
     @FXML
     private TextField txtSelectIndex;
     @FXML
-    private Button btnCancel, btnDelete;
+    private Button btnCancel;
 
     /**
      * @method cancelAction() is for closing the window if the user wants to

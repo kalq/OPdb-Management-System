@@ -48,6 +48,11 @@ public class EditRatingController implements Initializable {
         stage.close();
     }
     
+    /**
+     * @method confirmAction() uses the editRecord method from FileManager class
+     * to make changes after they confirm the edit.
+     * @param event
+     */
     @FXML
     private void confirmAction(ActionEvent event) {
         FileManager.editRecord(Integer.parseInt(lblIndex.getText()), "rating", lblCount.getText());

@@ -33,27 +33,32 @@ public class EditDeveloperController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //For limiting the Developer limit to only 20 characters to be typed
         txtDeveloper.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("^[a-zA-Z]{0,20}$")) {
+            if (!newValue.matches("^[ a-zA-Z]{0,20}$")) { //REGEX only letters, spaces and numbers.
                 txtDeveloper.setText(oldValue);
             }
         });
-    }    
+    }
 
     @FXML
     private void cancelAction() {
-        Stage stage = (Stage) btnCancel.getScene().getWindow(); 
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * @method confirmAction() uses the editRecord method from FileManager class
+     * to make changes after they confirm the edit.
+     * @param event
+     */
     @FXML
     private void confirmAction(ActionEvent event) {
         FileManager.editRecord(Integer.parseInt(lblIndex.getText()), "developer", txtDeveloper.getText()); //FileManager method does the work
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
-    
+
     public void transferIndex(String index) {
         lblIndex.setText(index);
     }
-    
+
 }
